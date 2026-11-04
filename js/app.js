@@ -26,12 +26,44 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(button);                       
         list.appendChild(li);
         input.value ='';
+        updateCounter(); 
     });
      list.addEventListener('click', (e) => {
         if (e.target.classList.contains('delete-btn')) {
             e.target.parentElement.remove();
+            updateCounter(); 
         } else if (e.target.classList.contains('item-text')) {
           e.target.parentElement.classList.toggle('completed');  
+          updateCounter(); 
         }
     });
+    activebtn.addEventListener('click', () => {
+    for (const li of list.children) {
+        if (li.classList.contains('completed')) {
+          li.style.display = 'none'; 
+        } else {
+          li.style.display = ''; 
+
+        }
+    }});
+    donebtn.addEventListener('click', () => {
+    for (const li of list.children) {
+        if (li.classList.contains('completed')) {
+             li.style.display = ''; 
+        } else {
+             li.style.display = 'none'; 
+        }
+    }
+});
+allbtn.addEventListener('click', () => {
+    for (const li of list.children) {
+       li.style.display = ''; 
+    }
+});
+    function updateCounter() {
+        const total = list.children.length;
+        const done = list.getElementsByClassName('completed').length;
+        counter.textContent = `${total - done} items left`;
+    }
+
 });

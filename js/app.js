@@ -16,8 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         errorMsg.classList.add("hidden");
         const li=document.createElement('li');
-        li.textContent=text;
+        const span = document.createElement('span');   
+        span.classList.add('item-text');                
+        span.textContent = text;   
+        li.appendChild(span);    
+         const button = document.createElement('button');   
+        button.classList.add('delete-btn');                
+        button.textContent = 'Delete';   
+        li.appendChild(button);                       
         list.appendChild(li);
         input.value ='';
+    });
+     list.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            e.target.parentElement.remove();
+        } else if (e.target.classList.contains('item-text')) {
+          e.target.parentElement.classList.toggle('completed');  
+        }
     });
 });
